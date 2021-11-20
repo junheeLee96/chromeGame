@@ -29,17 +29,68 @@ class Cactus {
     }
 }
 
-var cactus = new Cactus();
-cactus.draw();
+let timer = 0;
+let jumpTimer = 0;
+var cactuses = [];
+let animation;
 
+function FrameForSec() {
+    animation = requestAnimationFrame(FrameForSec);
+    timer++;
 
-function frameSec(){
-    requestAnimationFrame(frameSec);
-    ctx.clearRect(0,0, canvas.width, canvas.height);
-   
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    if (timer % 200 === 0) {
+        var cactus = new Cactus();
+        cactuses.push(cactus);
+    }
+    cactuses.forEach((a, i, o) => {
+        //x좌표가 0미만이면 제거
+        if (a.x < 0) {
+            o.splice(i, 1);
+        }
+        a.x--;
+        collisionCheck(dino, a)
+        a.draw();
+    })
+    if (onSpacebar === true) {
+        dino.y -= 3;
+        jumpTimer++;
+    }
+    if (onSpacebar === false) {
+        if (dino.y < 200) {
+            dino.y += 3;
+        }
+    }
+    if (jumpTimer > 40) {
+        onSpacebar = false;
+        jumpTimer = 0;
+    }
+
     dino.draw();
 }
 
-frameSec();
+FrameForSec();
+
+//충돌 확인
+
+function collisionCheck(dino, cactus) {
+    let xdifference = cactus.x - (dino.x + dino.width);
+    let ydifference = cactus.y - (dino.y + dino.height);
+    if (xdifference < 0 && ydifference < 0) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        cancelAnimationFrame(animation);
+    }
+}
+
+var onSpacebar = false;
+
+function onClickSpacebar(event) {
+    if (event.code === "Space") {
+        onSpacebar = true;
+    }
+}
+
+document.addEventListener("keydown", onClickSpacebar)
 
 
