@@ -2,14 +2,20 @@
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext('2d');
 
+
 canvas.width = window.innerWidth - 100;
 canvas.height = window.innerHeight - 100;
 
+let img = new Image();
+img.src = 'img/cactus.png';
+let img2 = new Image();
+img2.src = 'img/dinosaur2.png';
+
 var dino = {
-    x: 10,
-    y: 200,
-    width: 50,
-    height: 50,
+    x: 300,
+    y: 432,
+    width: 40,
+    height: 40,
     draw() {
         ctx.fillStyle = "green";
         ctx.fillRect(this.x, this.y, this.width, this.height);
@@ -17,19 +23,14 @@ var dino = {
     }
 }    
 
-let img = new Image();
-img.src = 'img/cactus.png';
-
-let img2 = new Image();
-img2.src = 'img/dinosaur2.png';
 
 
 class Cactus {
     constructor() {
-        this.x = 500;
-        this.y = 200;
-        this.width = 50;
-        this.height = 50;
+        this.x = 900;
+        this.y = 428;
+        this.width = 40;
+        this.height = 48;
     }    
     draw() {
         ctx.fillStyle = "red";
@@ -44,13 +45,15 @@ let jumpTimer = 0;
 var cactuses = [];
 let animation;
 
+var onSpacebar = false;
+
 function FrameForSec() {
     animation = requestAnimationFrame(FrameForSec);
     timer++;
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    if (timer % 200 === 0) {
+    if (timer % 144 === 0) {
         var cactus = new Cactus();
         cactuses.push(cactus);
     }
@@ -68,7 +71,7 @@ function FrameForSec() {
         jumpTimer++;
     }
     if (onSpacebar === false) {
-        if (dino.y < 200) {
+        if (dino.y < 432) {
             dino.y += 3;
         }
     }
@@ -90,10 +93,11 @@ function collisionCheck(dino, cactus) {
     if (xdifference < 0 && ydifference < 0) {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         cancelAnimationFrame(animation);
+        canvas.classList.remove('back')
+        canvas.classList.add('hide');
     }
 }
 
-var onSpacebar = false;
 
 function onClickSpacebar(event) {
     if (event.code === "Space") {

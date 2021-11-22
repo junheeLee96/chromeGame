@@ -1,0 +1,26 @@
+
+canvas{
+    margin:50;
+    /*
+    background-image: url('img/background.png');
+    background-repeat: no-repeat;
+    background-position: center center;
+    */
+}
+
+.back{
+    background:url('img/background.png') 0 center / 500px repeat-x;
+    animation: movebg 4.5s linear infinite;
+}
+
+@keyframes movebg {
+    0% {background-position: 0 center;}
+    100% {background-position: -500px center;}
+}
+
+.hide{
+    background-image: url('img/background.png');
+    background-position: center center;
+    background-repeat: no-repeat;
+
+}
