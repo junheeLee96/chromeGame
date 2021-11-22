@@ -13,8 +13,16 @@ var dino = {
     draw() {
         ctx.fillStyle = "green";
         ctx.fillRect(this.x, this.y, this.width, this.height);
+        ctx.drawImage(img2,this.x, this.y);
     }
-}
+}    
+
+let img = new Image();
+img.src = 'img/cactus.png';
+
+let img2 = new Image();
+img2.src = 'img/dinosaur2.png';
+
 
 class Cactus {
     constructor() {
@@ -22,12 +30,14 @@ class Cactus {
         this.y = 200;
         this.width = 50;
         this.height = 50;
-    }
+    }    
     draw() {
         ctx.fillStyle = "red";
         ctx.fillRect(this.x, this.y, this.width, this.height);
-    }
-}
+        ctx.drawImage(img,this.x, this.y);
+    }    
+}    
+
 
 let timer = 0;
 let jumpTimer = 0;
