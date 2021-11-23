@@ -10,6 +10,12 @@ img.src = 'img/cactus.png';
 let img2 = new Image();
 img2.src = 'img/dinosaur2.png';
 
+const MAXSCORE = "maxscore";
+
+const getmax = localStorage.getItem(MAXSCORE);
+
+
+
 function scsc(){
     score += 1;
 }
@@ -27,6 +33,13 @@ var dino = {
         ctx.drawImage(img2,this.x, this.y);
         ctx.font = "30px verdana";
         ctx.strokeStyle = "blue";
+        if(getmax > score){
+        ctx.fillText(getmax,1000,150);
+    }
+    else if(getmax <= score){
+        ctx.fillText(score,1000,150)
+    }
+    
         ctx.fillText(score,1000,200);
     }
 }    
@@ -53,6 +66,7 @@ let cnt = Math.floor(Math.random() * 200);
 var onSpacebar = false;
 let speed = 2;
 
+
 //충돌 확인
 function collisionCheck(dino, cactus) {
     let xdifference = cactus.x - (dino.x + dino.width);
@@ -62,6 +76,13 @@ function collisionCheck(dino, cactus) {
         cancelAnimationFrame(animation);
         canvas.classList.remove('back')
         canvas.classList.add('hide');
+        const MAX = localStorage.getItem(MAXSCORE);
+        if(MAX === null){
+            localStorage.setItem(MAXSCORE, score);
+        }
+        if(MAX < score){
+            localStorage.setItem(MAXSCORE,score);
+        }
     }
 }
 
