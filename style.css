@@ -1,4 +1,8 @@
-
+body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
 .back{
     background:url('img/background.png') 0 center / 500px repeat-x;
