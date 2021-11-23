@@ -1,12 +1,4 @@
 
-canvas{
-    margin:50;
-    /*
-    background-image: url('img/background.png');
-    background-repeat: no-repeat;
-    background-position: center center;
-    */
-}
 
 .back{
     background:url('img/background.png') 0 center / 500px repeat-x;
@@ -25,6 +17,3 @@ canvas{
 
 }
 
-#rank{
-    text-align: center;
-}
